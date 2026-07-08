@@ -1,0 +1,13 @@
+h1 {
+  color: pink;
+}
+
+body {
+  background-color: #dcd5d0;
+}
+.pixel-art {
+  width: 96px; /* 32 × 3 */
+  height: 96px;
+
+  image-rendering: pixelated;
+}
