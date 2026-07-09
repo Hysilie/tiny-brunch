@@ -55,8 +55,8 @@
 
 # 🍽️ Vaisselle
 
-- [ ] Assiette
-- [ ] Petite assiette
+- [x] Assiette
+- [x] Petite assiette
 - [x] Tasse
 - [x] Verre
 - [ ] Couverts
@@ -84,7 +84,7 @@
 
 - [x] Toasts
 - [x] Bagels
-- [ ] Salade
+- [x] Salade
 - [x] Pancakes
 
 ## Sweet
@@ -96,15 +96,15 @@
 
 ## Fruit
 
-- [ ] Compote
-- [ ] Nectarine
-- [ ] Kiwi
+- [x] Compote
+- [x] Banane
+- [x] Kiwi
 
 ## Extra
 
-- [ ] Fromage
-- [ ] Yaourt blanc
-- [ ] Œufs
+- [x] Fromage
+- [x] Yaourt blanc
+- [x] Œufs
 
 ---
 
