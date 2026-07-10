@@ -7,7 +7,7 @@
 - [ ] Ajouter la police pixel
 - [ ] Définir la palette de couleurs
 - [ ] Créer les variables CSS
-- [ ] Configurer le favicon
+- [x] Configurer le favicon
 - [ ] Écrire le README
 
 ---
@@ -25,9 +25,10 @@
 ## Style
 
 - [ ] Définir la taille des sprites
-- [ ] Définir la taille des contours
+- [x] Définir la taille des sprites animés
+- [x] Définir la taille des contours
 - [ ] Définir la direction de la lumière
-- [ ] Définir le style des ombres
+- [x] Définir le style des ombres
 
 ---
 
@@ -35,21 +36,21 @@
 
 ## Structure
 
-- [ ] Mur
-- [ ] Sol
-- [ ] Fenêtre
-- [ ] Vue extérieure
-- [ ] Table
-- [ ] Nappe
-- [ ] Chaise gauche
-- [ ] Chaise droite
+- [x] Mur
+- [x] Sol
+- [x] Fenêtre
+- [x] Vue extérieure
+- [x] Table
+- [x] Nappe
+- [x] Chaise gauche
+- [x] Chaise droite
 
 ## Décoration
 
-- [ ] Plante
-- [ ] Radio
-- [ ] Chat sur la fenêtre
-- [ ] Chat dans son panier
+- [x] Plante
+- [x] Radio
+- [x] Chat sur la fenêtre
+- [x] Chat dans son panier
 
 ---
 
@@ -113,7 +114,7 @@
 ## Structure
 
 - [ ] Header
-- [ ] Zone du décor
+- [x] Zone du décor
 - [ ] Panneau de sélection
 - [ ] Boutons précédent / suivant
 - [ ] Liste des choix
@@ -157,7 +158,7 @@
 - [X] Fonction Meow
 - [X] Son "Cassette"
 - [X] Associer à la musique
-- [ ] Associer aux assets
+- [x] Associer aux assets
 
 ---
 
@@ -165,9 +166,9 @@
 
 - [ ] Apparition d'un plat
 - [ ] Transition entre les catégories
-- [ ] Radio ON / OFF
+- [x] Radio ON / OFF
 - [ ] Vapeur des boissons chaudes
-- [ ] Plante qui bouge légèrement
+- [x] Chats qui bougent
 
 ---
 

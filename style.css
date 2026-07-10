@@ -1,13 +1,99 @@
-h1 {
-  color: pink;
+body {
+  margin: 0;
+
+  background: lightblue;
 }
 
-body {
-  background-color: #dcd5d0;
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 1152px;
+    width: min(100%, calc(100vh * 4 / 7));
+
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0px 0px 15px 4px rgba(68,48,28,0.51)
 }
+
+.scene-wrapper {
+  width: min(100%, calc(100vh * 4 / 7));
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.scene {
+  width: 100%;
+  height: 100%;
+}
+
 .pixel-art {
   width: 96px; /* 32 × 3 */
   height: 96px;
+}
 
+.picker {
+  flex: 1;
+  min-height: 0;
+  width: min(100%, calc(100vh * 4 / 7));
+  max-width: 1152px;
+
+  background-color: lightpink;
+}
+
+.pixel-art,
+.scene,
+.radio,
+.cat1,
+.cat2 {
   image-rendering: pixelated;
+}
+
+/* Assets */
+
+.radio,
+.cat1,
+.cat2 {
+  position: absolute;
+}
+/* Pour calculer le % de la largeur et de la hauteur : (valeur en pixels dans le canevas 384×384) ÷ 384 × 100 */
+
+
+.radio {
+  width: 24%; 
+  height: 12.16%;
+
+  top: 29%;
+  left: 39.5%
+}
+
+.cat1 {
+  width: 18.25%;  
+  height: 12.16%;
+
+
+  top:44.5%;
+  left: 1%;
+}
+
+.cat2 {
+  width: 12.17%;
+  height: 24.33%;
+
+  top: 19.45%;
+  left: 25%;
+}
+
+.locked {
+  pointer-events: none;
+  opacity: 0.6;
 }
