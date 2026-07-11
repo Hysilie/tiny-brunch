@@ -17,6 +17,7 @@
 ## Palette
 
 - [ ] Choisir les couleurs principales
+- [ ] Choisir un curseur
 - [ ] Choisir les couleurs des ombres
 - [ ] Choisir les couleurs des contours
 - [ ] Définir les couleurs de la nourriture
@@ -135,7 +136,7 @@
 - [ ] Passer à la catégorie suivante
 - [ ] Revenir à la catégorie précédente
 - [ ] Afficher la catégorie actuelle
-
+c
 ## Sélection
 
 - [ ] Sélectionner un élément

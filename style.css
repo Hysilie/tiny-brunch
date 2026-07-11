@@ -11,11 +11,11 @@ body {
   align-items: center;
   height: 100vh;
   max-width: 1152px;
-    width: min(100%, calc(100vh * 4 / 7));
+  width: min(100%, calc(100vh * 4 / 7));
 
   margin: 0 auto;
   background-color: white;
-  box-shadow: 0px 0px 15px 4px rgba(68,48,28,0.51)
+  box-shadow: 0px 0px 15px 4px rgba(68, 48, 28, 0.51);
 }
 
 .scene-wrapper {
@@ -50,6 +50,11 @@ body {
   background-color: lightpink;
 }
 
+.locked {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .pixel-art,
 .scene,
 .radio,
@@ -58,34 +63,49 @@ body {
   image-rendering: pixelated;
 }
 
-/* Assets */
-
+/* Assets positionning */
+.absolute,
 .radio,
 .cat1,
-.cat2 {
+.cat2,
+.main-1,
+.main-2,
+.sweet-1,
+.sweet-2,
+.extra-1,
+.extra-2,
+.fruit-1,
+.fruit-2,
+.hdrink-1,
+.hdrink-2,
+.cdrink-1,
+.cdrink-2 {
   position: absolute;
+  width: 12%;
+  height: 12%;
 }
 /* Pour calculer le % de la largeur et de la hauteur : (valeur en pixels dans le canevas 384×384) ÷ 384 × 100 */
 
-
 .radio {
-  width: 24%; 
+  /* Override size */
+  width: 24%;
   height: 12.16%;
 
   top: 29%;
-  left: 39.5%
+  left: 39.5%;
 }
 
 .cat1 {
-  width: 18.25%;  
+  /* Override size */
+  width: 18.25%;
   height: 12.16%;
 
-
-  top:44.5%;
+  top: 44.5%;
   left: 1%;
 }
 
 .cat2 {
+  /* Override size */
   width: 12.17%;
   height: 24.33%;
 
@@ -93,7 +113,100 @@ body {
   left: 25%;
 }
 
-.locked {
-  pointer-events: none;
-  opacity: 0.6;
+.main-1 {
+  top: 57%;
+  left: 38%;
+}
+
+.main-2 {
+  top: 62%;
+  left: 49%;
+}
+
+.fruit-1 {
+  top: 47%;
+  left: 33%;
+}
+
+.fruit-2 {
+  top: 42%;
+  left: 66%;
+}
+
+.sweet-1 {
+  top: 55%;
+  left: 20%;
+}
+
+.sweet-2 {
+  top: 53%;
+  left: 54%;
+}
+
+.hdrink-1 {
+  top: 66.2%;
+  left: 16%;
+}
+
+.hdrink-2 {
+  top: 66%;
+  left: 74%;
+}
+
+.cdrink-1 {
+  top: 65.8%;
+  left: 28%;
+}
+
+.cdrink-2 {
+  top: 66%;
+  left: 63%;
+}
+
+.extra-1 {
+  top: 42.8%;
+  left: 23%;
+}
+
+.extra-2 {
+  top: 53%;
+  left: 69%;
+}
+/* Detailed food scale */
+
+.salad {
+  transform: scale(0.83);
+}
+
+.cheese {
+  transform: scale(1.2);
+}
+
+.kiwi,
+.banana,
+.egg-and-bacon{
+  transform: scale(1.4);
+}
+
+.hdrink-1,
+.hdrink-2 {
+  transform: scale(0.7);
+}
+
+.cdrink-1,
+.cdrink-2 {
+  transform: scale(0.8);
+}
+
+.cheese,
+.egg-and-bacon,
+.banana,
+.compote,
+.salad,
+.kiwi,
+.hdrink-1,
+.hdrink-2,
+.cdrink-1,
+.cdrink-2 {
+  transform-origin: center;
 }
