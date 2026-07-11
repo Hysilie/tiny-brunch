@@ -38,8 +38,8 @@
     />
     <img
       class="pixel-art"
-      src="assets/foods/hot-drinks/tea/cup-macha.png"
-      alt="A cup of macha"
+      src="assets/foods/hot-drinks/tea/cup-matcha.png"
+      alt="A cup of matcha"
       id="latte"
     />
     <h2>Cold drinks :</h2>
@@ -163,14 +163,14 @@
         <!-- Hot drinks -->
         <img
           class="pixel-art hdrink-1"
-          src="assets/foods/hot-drinks/coffee/coffe-cup-static.png"
+          src="assets/foods/hot-drinks/coffee.png"
           alt="Hot drink for player 1"
           id="hdrink-1"
         />
 
         <img
           class="pixel-art hdrink-2"
-          src="assets/foods/hot-drinks/tea/cup-macha.png"
+          src="assets/foods/hot-drinks/matcha.png"
           alt="Hot drink for player 2"
           id="hdrink-2"
         />
@@ -260,7 +260,21 @@
         <div class="cat1" id="meow1"></div>
         <div class="cat2" id="meow2"></div>
       </div>
-      <section class="picker">🥞</section>
+      <section class="picker">
+          <p class="picker-player"></p>
+
+  <div class="picker-category">
+    <button class="previous-category" type="button">←</button>
+    <h2 class="category-label"></h2>
+    <button class="next-category" type="button">→</button>
+  </div>
+
+  <div class="picker-items"></div>
+
+  <button class="validate-choice" type="button">
+    Valider
+  </button>
+      </section>
     </div>
   </body>
 </html>

@@ -1,6 +1,8 @@
 import { playMeow1, playMeow2, toggleMusic } from "./sounds.js";
 import { animateSprite } from "./animations.js";
-
+import { categories, items } from "./data.js";
+import { players, gameState } from "./state.js";
+import { selectFocusedItem } from "./picker.js";
 
 // Audio DOM
 const audioButton = document.getElementById("audio");
@@ -83,7 +85,6 @@ const cat2Frames = [
 animateSprite("cat1", cat1Frames, 12, 6000);
 animateSprite("cat2", cat2Frames, 17, 6000);
 
-
 audioButton.addEventListener("click", toggleMusic);
 meow1Button.addEventListener("click", playMeow1);
 meow2Button.addEventListener("click", playMeow2);
@@ -94,3 +95,4 @@ animateSprite("tea", teaFrames, 8);
 animateSprite("radio", radioFrames, 12);
 
  */
+
