@@ -2,8 +2,8 @@ import { animateSprite, stopAnimate } from "./animations.js";
 import { radioFrames } from "./app.js";
 // Music
 const backgroundMusic = new Audio("assets/music/Hazelwood - At Ease.mp3");
-const meow1 = new Audio("assets/sounds/meow1.mp3");
-const meow2 = new Audio("assets/sounds/meow2.mp3");
+const meow2 = new Audio("assets/sounds/meow1.mp3");
+const meow1 = new Audio("assets/sounds/meow2.mp3");
 const cassetteInsert = new Audio("assets/sounds/cassette_insert.mp3");
 const cassetteEject = new Audio("assets/sounds/cassette-eject.mp3");
 
@@ -21,7 +21,7 @@ export const toggleMusic = () => {
       backgroundMusic.play();
       radioButton.classList.remove("locked");
     };
-    radioInterval = animateSprite('radio', radioFrames, 12);
+    radioInterval = animateSprite('radio', radioFrames, 12, 2000);
   } else {
     isOn = false;
     cassetteEject.play();

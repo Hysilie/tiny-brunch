@@ -32,8 +32,14 @@ body {
 }
 
 .scene {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+.filter {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 .pixel-art {
@@ -64,7 +70,6 @@ body {
 }
 
 /* Assets positionning */
-.absolute,
 .radio,
 .cat1,
 .cat2,
