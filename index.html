@@ -13,124 +13,43 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <!-- 
-
-    <h2>Hot drinks :</h2>
-  
-    <img
-      class="pixel-art"
-      src="assets/foods/hdrink/coffee/coffe-cup-static.png"
-      alt="A cup of coffee"
-      id="coffee-static"
-    />
-
-    <img
-      class="pixel-art"
-      src="assets/foods/hdrink/tea/cup-tea-static.png"
-      alt="A cup of tea"
-      id="tea-static"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/hdrink/coffee/cup-latte.png"
-      alt="A cup of latte"
-      id="latte"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/hdrink/tea/cup-matcha.png"
-      alt="A cup of matcha"
-      id="latte"
-    />
-    <h2>Cold drinks :</h2>
-    <img
-      class="pixel-art"
-      src="assets/foods/cdrink/orange-juice.png"
-      alt="An orange juice"
-      id="orange"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/cdrink/lemon-juice.png"
-      alt="A lemon juice"
-      id="lemon"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/cdrink/smoothie.png"
-      alt="A smoothie"
-      id="smoothie"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/cdrink/soda.png"
-      alt="A soda"
-      id="soda"
-    />
-
-    <h2>Sweet :</h2>
-    <img
-      class="pixel-art"
-      src="assets/foods/sweet/cookie.png"
-      alt="Two cookies"
-      id="cookie"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/sweet/slice-of-cake.png"
-      alt="Slice of cake"
-      id="cake"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/sweet/toast.png"
-      alt="A toast"
-      id="toast"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/sweet/pancakes.png"
-      alt="Some pancakes"
-      id="pancakes"
-    />
-   
-    <h2>Extra :</h2>
-    <img
-      class="pixel-art"
-      src="assets/foods/extra/egg-and-bacon.png"
-      alt="Egg and bacon"
-      id="egg-bacon"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/extra/cheese.png"
-      alt="Some cheese"
-      id="cheese"
-    />
-    <img
-      class="pixel-art"
-      src="assets/foods/extra/yogourt.png"
-      alt="A yogourt"
-      id="yogourt"
-    />
-      
-
-     <h2>Animated :</h2>
-  <img
-      class="pixel-art"
-      alt="A cup of coffee"
-      id="coffee"
-    />
-
-    <img
-      class="pixel-art"
-      alt="A cup of tea"
-      id="tea"
-    />
-
-
-  -->
     <div class="game">
+    <div class="game-intro">
+        <div class="game-intro__panel">
+          <h1>Tiny Brunch</h1>
+          <p>Qui partage ce brunch aujourd’hui ?</p>
+
+          <label>
+            Joueur 1
+            <input
+              type="text"
+              class="player-one-name"
+              maxlength="16"
+              autocomplete="off"
+            />
+          </label>
+
+          <label>
+            Joueur 2
+            <input
+              type="text"
+              class="player-two-name"
+              maxlength="16"
+              autocomplete="off"
+            />
+          </label>
+
+          <button type="button" class="start-game" disabled>Commencer</button>
+        </div>
+      </div> 
+
+      <div class="game-finished is-hidden">
+        <p> Votre brunch est prêt </p>
+        <div class="brunch-list-container">
+         
+        </div>
+        <button class="send-command">Envoyer la commande</button>
+      </div>
       <div class="scene-wrapper">
         <img
           src="assets/background/background.png"
@@ -158,28 +77,28 @@
           id="cat2"
         />
 
-
-        <!-- Food -->
-        
- <!-- Clickable div -->
+        <!-- Clickable div -->
         <div class="radio" id="audio"></div>
         <div class="cat1" id="meow1"></div>
         <div class="cat2" id="meow2"></div>
       </div>
+      <div class="player-transition" hidden>
+        <p class="transition-message"></p>
+
+        <button class="start-next-player" type="button">Continuer</button>
+      </div>
       <section class="picker">
-          <p class="picker-player"></p>
+        <p class="picker-player"></p>
 
-  <div class="picker-category">
-    <button class="previous-category" type="button">←</button>
-    <h2 class="category-label"></h2>
-    <button class="next-category" type="button">→</button>
-  </div>
+        <div class="picker-category">
+          <button class="previous-category" type="button">←</button>
+          <h2 class="category-label"></h2>
+          <button class="next-category" type="button">→</button>
+        </div>
 
-  <div class="picker-items"></div>
+        <div class="picker-items"></div>
 
-  <button class="validate-choice" type="button">
-    Valider
-  </button>
+        <button class="validate-choice" type="button">Valider</button>
       </section>
     </div>
   </body>

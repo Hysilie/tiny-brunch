@@ -3,7 +3,8 @@ import { animateSprite } from "./animations.js";
 import { categories, items } from "./data.js";
 import { players, gameState } from "./state.js";
 import { nextItem, selectFocusedItem } from "./picker.js";
-import { renderPicker, renderTable } from "./render.js";
+import { renderGame, renderPicker, renderTable } from "./render.js";
+import { updateStartButtonState } from "./introduction.js";
 
 // Audio DOM
 const audioButton = document.getElementById("audio");
@@ -96,6 +97,5 @@ animateSprite("tea", teaFrames, 8);
 animateSprite("radio", radioFrames, 12);
 
  */
-
-renderPicker();
-renderTable();
+updateStartButtonState();
+renderGame();

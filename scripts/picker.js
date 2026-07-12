@@ -1,5 +1,6 @@
 import { players, gameState } from "./state.js";
 import { categories } from "./data.js";
+import { renderFinishedGame } from "./render.js";
 
 export const selectFocusedItem = () => {
   const currentPlayer = players[gameState.currentPlayerIndex];
@@ -79,15 +80,36 @@ export const previousCategory = () => {
 };
 
 export const validateCurrentChoice = () => {
-  const isLastPlayer = gameState.currentPlayerIndex === 1;
+  const isLastPlayer = gameState.currentPlayerIndex === players.length - 1;
+
   const isLastCategory =
     gameState.currentCategoryIndex === categories.length - 1;
+
   selectFocusedItem();
-  if (isLastCategory && isLastPlayer) console.log("Victory");
-  if (!isLastCategory) nextCategory();
-  if (isLastCategory && !isLastPlayer) {
-    gameState.currentPlayerIndex++;
-    gameState.currentCategoryIndex = 0;
-    gameState.focusedItemIndex = 0;
+
+  if (!isLastCategory) {
+    nextCategory();
+    return;
   }
+
+  if (!isLastPlayer) {
+    gameState.status = "player-transition";
+    return;
+  }
+
+  gameState.status = "finished";
+  renderFinishedGame();
+};
+
+export const startNextPlayer = () => {
+  if (gameState.status !== "player-transition") {
+    return;
+  }
+
+  gameState.currentPlayerIndex++;
+  gameState.currentCategoryIndex = 0;
+  gameState.focusedItemIndex = 0;
+  gameState.status = "playing";
+
+  syncFocusedItemWithCurrentChoice();
 };

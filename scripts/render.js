@@ -3,6 +3,7 @@ import {
   canGoToNextCategory,
   nextCategory,
   previousCategory,
+  startNextPlayer,
   validateCurrentChoice,
 } from "./picker.js";
 import { gameState, players } from "./state.js";
@@ -13,12 +14,17 @@ const itemsElement = document.querySelector(".picker-items");
 const validateButton = document.querySelector(".validate-choice");
 const previousCategoryButton = document.querySelector(".previous-category");
 const nextCategoryButton = document.querySelector(".next-category");
+const pickerElement = document.querySelector(".picker");
+const transitionElement = document.querySelector(".player-transition");
+const transitionMessageElement = document.querySelector(".transition-message");
+const startNextPlayerButton = document.querySelector(".start-next-player");
 
 export const renderPicker = () => {
   const currentPlayer = players[gameState.currentPlayerIndex];
   const currentCategory = categories[gameState.currentCategoryIndex];
 
-  playerElement.textContent = `Joueur ${currentPlayer.id}`;
+  playerElement.textContent =
+    currentPlayer.name || `Joueur ${currentPlayer.id}`;
   categoryLabelElement.textContent = currentCategory.label;
 
   ((itemsElement.innerHTML = ""),
@@ -41,8 +47,7 @@ export const renderPicker = () => {
       }
       button.addEventListener("click", () => {
         gameState.focusedItemIndex = index;
-        renderPicker();
-        renderTable();
+        renderGame();
       });
       itemsElement.append(button);
     }));
@@ -52,8 +57,7 @@ export const renderPicker = () => {
 
 validateButton.addEventListener("click", () => {
   validateCurrentChoice();
-  renderPicker();
-  renderTable();
+  renderGame();
 
   const isLastCategory =
     gameState.currentCategoryIndex === categories.length - 1;
@@ -62,12 +66,9 @@ validateButton.addEventListener("click", () => {
 
   if (isLastCategory && isLastPlayer) {
     validateButton.textContent = "Passer commande";
-  } else if (isLastCategory) {
-    validateButton.textContent = "Passer au joueur 2";
   } else {
     validateButton.textContent = "Valider";
   }
-  console.log(players[0].choices);
 });
 
 previousCategoryButton.addEventListener("click", () => {
@@ -110,12 +111,6 @@ export const renderTable = () => {
       isPreview: true,
     });
   }
-  createFoodImage({
-    player: currentPlayer,
-    categoryId: currentCategory.id,
-    itemId: focusedItemId,
-    isPreview: true,
-  });
 };
 
 const createFoodImage = ({ player, categoryId, itemId, isPreview }) => {
@@ -144,4 +139,83 @@ const createFoodImage = ({ player, categoryId, itemId, isPreview }) => {
   }
 
   sceneWrapper.append(img);
+};
+
+export const renderPlayerTransition = () => {
+  const isTransition = gameState.status === "player-transition";
+
+  transitionElement.hidden = !isTransition;
+  pickerElement.hidden = isTransition;
+
+  if (!isTransition) {
+    return;
+  }
+
+  const finishedPlayer = players[gameState.currentPlayerIndex];
+
+  const nextPlayer = players[gameState.currentPlayerIndex + 1];
+
+  transitionMessageElement.textContent =
+    `${finishedPlayer.name} a terminé son brunch ! ` +
+    `À ${nextPlayer.name} de jouer.`;
+};
+
+export const renderGame = () => {
+  renderPicker();
+  renderTable();
+  renderPlayerTransition();
+};
+
+startNextPlayerButton.addEventListener("click", () => {
+  startNextPlayer();
+  renderGame();
+});
+
+const gameFinishedElement = document.querySelector(".game-finished");
+const listContainer = document.querySelector(".brunch-list-container");
+const sendCommandButton = document.querySelector(".send-command");
+
+export const renderFinishedGame = () => {
+  const isGameFinished = gameState.status === "finished";
+  gameFinishedElement.classList.remove("is-hidden");
+
+  listContainer.innerHTML = "";
+  listContainer.append(...players.map((player) => createListByPlayer(player)));
+
+  sendCommandButton.addEventListener("click", () => {
+    console.log("Send informations ");
+    gameState.currentPlayerIndex = 0;
+    gameState.currentCategoryIndex = 0;
+    gameState.focusedItemIndex = 0;
+    gameState.status = "intro";
+    console.log(gameState);
+  });
+};
+
+const createListByPlayer = (player) => {
+  const playerList = document.createElement("div");
+  playerList.classList.add("brunch-list");
+
+  const name = document.createElement("h3");
+  name.textContent = player.name || `Joueur ${player.id}`;
+  playerList.append(name);
+
+  const ul = document.createElement("ul");
+
+  categories.forEach((category) => {
+    const itemId = player.choices[category.id];
+    const item = items[itemId];
+
+    if (!item) {
+      return;
+    }
+
+    const li = document.createElement("li");
+    li.textContent = `${category.label} : ${item.name}`;
+    ul.append(li);
+  });
+
+  playerList.append(ul);
+
+  return playerList;
 };
