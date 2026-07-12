@@ -77,7 +77,7 @@ body {
   margin: 0 auto;
   background-color: var(--game-background);
   border-radius: 8px;
-  box-shadow: 0 0 15px 4px var(--border-light);
+  box-shadow: 0 0 15px 4px var(--sage-green-dark);
   overflow: hidden;
 }
 
@@ -89,7 +89,6 @@ body {
   }
 }
 
-/* Top-right game controls (reload, volume) */
 .game-controls {
   position: absolute;
   top: 12px;
@@ -234,7 +233,6 @@ body {
   display: none;
 }
 
-/* Reload confirmation dialog */
 .confirm-dialog {
   position: absolute;
   inset: 0;
