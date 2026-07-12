@@ -215,3 +215,18 @@ body {
 .cdrink-2 {
   transform-origin: center;
 }
+
+/* Picker */
+.picker-item.is-focused {
+  outline: 3px solid black;
+  transform: translateY(-4px);
+}
+
+.is-selected{
+  outline:1px solid red;
+}
+
+.food-item.is-preview {
+    opacity: 0.45;
+  filter: saturate(0.7);
+}

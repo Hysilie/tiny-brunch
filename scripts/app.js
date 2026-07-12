@@ -2,7 +2,8 @@ import { playMeow1, playMeow2, toggleMusic } from "./sounds.js";
 import { animateSprite } from "./animations.js";
 import { categories, items } from "./data.js";
 import { players, gameState } from "./state.js";
-import { selectFocusedItem } from "./picker.js";
+import { nextItem, selectFocusedItem } from "./picker.js";
+import { renderPicker, renderTable } from "./render.js";
 
 // Audio DOM
 const audioButton = document.getElementById("audio");
@@ -96,3 +97,5 @@ animateSprite("radio", radioFrames, 12);
 
  */
 
+renderPicker();
+renderTable();

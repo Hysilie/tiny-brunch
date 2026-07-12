@@ -1,5 +1,5 @@
 import { players, gameState } from "./state.js";
-import { categories, items } from "./data.js";
+import { categories } from "./data.js";
 
 export const selectFocusedItem = () => {
   const currentPlayer = players[gameState.currentPlayerIndex];
@@ -31,14 +31,39 @@ export const previousItem = () => {
   }
 };
 
+export const syncFocusedItemWithCurrentChoice = () => {
+  const currentPlayer = players[gameState.currentPlayerIndex];
+  const currentCategory = categories[gameState.currentCategoryIndex];
+
+  const selectedItemId = currentPlayer.choices[currentCategory.id];
+  const selectedItemIndex = currentCategory.items.indexOf(selectedItemId);
+
+  gameState.focusedItemIndex = selectedItemIndex >= 0 ? selectedItemIndex : 0;
+};
+
+export const canGoToNextCategory = () => {
+  const currentCategory = categories[gameState.currentCategoryIndex];
+  const currentPlayer = players[gameState.currentPlayerIndex];
+
+  return currentCategory.id in currentPlayer.choices;
+};
+
 export const nextCategory = () => {
+  const currentCategory = categories[gameState.currentCategoryIndex];
+  const currentPlayer = players[gameState.currentPlayerIndex];
+
+  if (!canGoToNextCategory()) {
+    return;
+  }
+
   if (gameState.currentCategoryIndex === categories.length - 1) {
     return;
   }
-  if (gameState.currentCategoryIndex < categories.length - 1) {
-    gameState.currentCategoryIndex++;
-    gameState.focusedItemIndex = 0;
-  }
+
+  gameState.currentCategoryIndex++;
+  gameState.focusedItemIndex = 0;
+
+  syncFocusedItemWithCurrentChoice();
 };
 
 export const previousCategory = () => {
@@ -49,42 +74,20 @@ export const previousCategory = () => {
     gameState.currentCategoryIndex--;
     gameState.focusedItemIndex = 0;
   }
+
+  syncFocusedItemWithCurrentChoice();
 };
 
 export const validateCurrentChoice = () => {
-    const isLastPlayer = gameState.currentPlayerIndex === 1
-    const isLastCategory = gameState.currentCategoryIndex === categories.length - 1
-    selectFocusedItem() 
-    if (isLastCategory && isLastPlayer) console.log('Victory')
-    if (!isLastCategory) nextCategory()
-    if (isLastCategory && !isLastPlayer) {
-        gameState.currentPlayerIndex++
-        gameState.currentCategoryIndex = 0;
-        gameState.focusedItemIndex = 0
-    }
-}
-
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
-validateCurrentChoice()
-console.log('Player 1  : ', players[0].choices, '\nPlayer 2:', players[1].choices)
+  const isLastPlayer = gameState.currentPlayerIndex === 1;
+  const isLastCategory =
+    gameState.currentCategoryIndex === categories.length - 1;
+  selectFocusedItem();
+  if (isLastCategory && isLastPlayer) console.log("Victory");
+  if (!isLastCategory) nextCategory();
+  if (isLastCategory && !isLastPlayer) {
+    gameState.currentPlayerIndex++;
+    gameState.currentCategoryIndex = 0;
+    gameState.focusedItemIndex = 0;
+  }
+};
