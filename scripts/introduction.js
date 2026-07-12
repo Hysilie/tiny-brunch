@@ -17,6 +17,15 @@ document.querySelector(".picker").inert = true;
 playerOneInput.addEventListener("input", updateStartButtonState);
 playerTwoInput.addEventListener("input", updateStartButtonState);
 
+document.addEventListener("keydown", (event) => {
+  if (gameState.status !== "intro" || event.key !== "Enter") {
+    return;
+  }
+
+  event.preventDefault();
+  startButton.click();
+});
+
 startButton.addEventListener("click", () => {
   players[0].name = playerOneInput.value.trim();
   players[1].name = playerTwoInput.value.trim();

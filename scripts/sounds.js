@@ -12,6 +12,24 @@ const radioButton = document.getElementById("audio");
 let radioInterval = null;
 let isOn = false;
 
+const allSounds = [
+  backgroundMusic,
+  meow1,
+  meow2,
+  cassetteInsert,
+  cassetteEject,
+];
+
+allSounds.forEach((sound) => {
+  sound.volume = 0.5;
+});
+
+export const setGlobalVolume = (volume) => {
+  allSounds.forEach((sound) => {
+    sound.volume = volume;
+  });
+};
+
 export const toggleMusic = () => {
   if (!isOn) {
     isOn = true;
@@ -21,7 +39,7 @@ export const toggleMusic = () => {
       backgroundMusic.play();
       radioButton.classList.remove("locked");
     };
-    radioInterval = animateSprite('radio', radioFrames, 12, 2000);
+    radioInterval = animateSprite("radio", radioFrames, 12, 2000);
   } else {
     isOn = false;
     cassetteEject.play();

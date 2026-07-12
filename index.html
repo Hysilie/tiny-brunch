@@ -14,13 +14,46 @@
   </head>
   <body>
     <div class="game">
+      <div class="game-controls">
+        <label class="volume-control">
+          <span aria-hidden="true">♪</span>
+          <input
+            type="range"
+            class="volume-slider"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.6"
+            aria-label="Volume du son"
+          />
+        </label>
+        <button
+          type="button"
+          class="reload-game"
+          title="Recommencer la partie"
+          aria-label="Recommencer la partie"
+        >
+          ↻
+        </button>
+      </div>
+
+      <div class="confirm-dialog is-hidden">
+        <div class="confirm-dialog__panel">
+          <p>Recommencer ? ?</p>
+          <div class="confirm-dialog__actions">
+            <button type="button" class="confirm-cancel">Annuler</button>
+            <button type="button" class="confirm-accept">Recommencer</button>
+          </div>
+        </div>
+      </div>
+
       <div class="game-intro">
         <div class="game-intro__panel">
           <h1>Tiny Brunch</h1>
           <p>Qui partage ce brunch aujourd’hui ?</p>
 
           <label>
-            Joueur 1
+            Premier gourmet
             <input
               type="text"
               class="player-one-name"
@@ -30,7 +63,7 @@
           </label>
 
           <label>
-            Joueur 2
+            Second gourmet
             <input
               type="text"
               class="player-two-name"
@@ -39,12 +72,18 @@
             />
           </label>
 
-          <button type="button" class="start-game" disabled>Commencer</button>
+          <button type="button" class="start-game" disabled>Préparer le brunch</button>
         </div>
       </div>
 
       <div class="game-finished is-hidden">
-        <p>Votre brunch est prêt</p>
+        <p>Le brunch est prêt</p>
+        <img
+          class="pixel-art finished-coffee"
+          src="assets/animated/coffee/coffe-cup-dynamic1.png"
+          alt="Une tasse de café animée"
+          id="coffee"
+        />
         <div class="brunch-list-container"></div>
         <button class="send-command">Envoyer la commande</button>
       </div>
@@ -101,7 +140,7 @@
 
           <div class="picker-items"></div>
 
-          <button class="validate-choice" type="button">Valider</button>
+          <button class="validate-choice" type="button">Je garde ça !</button>
         </div>
       </section>
     </div>

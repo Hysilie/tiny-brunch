@@ -1,8 +1,13 @@
-import { playMeow1, playMeow2, toggleMusic } from "./sounds.js";
+import {
+  playMeow1,
+  playMeow2,
+  toggleMusic,
+  setGlobalVolume,
+} from "./sounds.js";
 import { animateSprite } from "./animations.js";
 import { categories, items } from "./data.js";
 import { players, gameState } from "./state.js";
-import { nextItem, selectFocusedItem } from "./picker.js";
+import { nextItem, previousItem } from "./picker.js";
 import { renderGame, renderPicker, renderTable } from "./render.js";
 import { updateStartButtonState } from "./introduction.js";
 
@@ -10,6 +15,14 @@ import { updateStartButtonState } from "./introduction.js";
 const audioButton = document.getElementById("audio");
 const meow1Button = document.getElementById("meow1");
 const meow2Button = document.getElementById("meow2");
+
+// Game controls DOM
+const reloadButton = document.querySelector(".reload-game");
+const volumeSlider = document.querySelector(".volume-slider");
+const validateButton = document.querySelector(".validate-choice");
+const confirmDialog = document.querySelector(".confirm-dialog");
+const confirmCancelButton = document.querySelector(".confirm-cancel");
+const confirmAcceptButton = document.querySelector(".confirm-accept");
 
 // Assets Hot Drinks
 
@@ -86,16 +99,55 @@ const cat2Frames = [
 
 animateSprite("cat1", cat1Frames, 12, 6000);
 animateSprite("cat2", cat2Frames, 17, 6000);
+animateSprite("coffee", coffeeFrames, 8);
 
 audioButton.addEventListener("click", toggleMusic);
 meow1Button.addEventListener("click", playMeow1);
 meow2Button.addEventListener("click", playMeow2);
 
-/* 
-animateSprite("coffee", coffeeFrames, 8);
-animateSprite("tea", teaFrames, 8);
-animateSprite("radio", radioFrames, 12);
+reloadButton.addEventListener("click", () => {
+  confirmDialog.classList.remove("is-hidden");
+});
+confirmCancelButton.addEventListener("click", () => {
+  confirmDialog.classList.add("is-hidden");
+});
+confirmAcceptButton.addEventListener("click", () => {
+  location.reload();
+});
+confirmDialog.addEventListener("click", (event) => {
+  if (event.target === confirmDialog) {
+    confirmDialog.classList.add("is-hidden");
+  }
+});
 
- */
+volumeSlider.addEventListener("input", (event) => {
+  setGlobalVolume(Number(event.target.value));
+});
+
+document.addEventListener("keydown", (event) => {
+  if (gameState.status !== "playing") {
+    return;
+  }
+
+  switch (event.key) {
+    case "ArrowRight":
+    case "ArrowDown":
+      event.preventDefault();
+      nextItem();
+      renderGame();
+      break;
+    case "ArrowLeft":
+    case "ArrowUp":
+      event.preventDefault();
+      previousItem();
+      renderGame();
+      break;
+    case "Enter":
+      event.preventDefault();
+      validateButton.click();
+      break;
+  }
+});
+
 updateStartButtonState();
 renderGame();

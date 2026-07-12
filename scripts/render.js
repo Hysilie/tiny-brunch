@@ -19,13 +19,25 @@ const transitionElement = document.querySelector(".player-transition");
 const transitionMessageElement = document.querySelector(".transition-message");
 const startNextPlayerButton = document.querySelector(".start-next-player");
 
+let lastRenderedCategoryIndex = null;
+
 export const renderPicker = () => {
   const currentPlayer = players[gameState.currentPlayerIndex];
   const currentCategory = categories[gameState.currentCategoryIndex];
 
+  const categoryChanged =
+    lastRenderedCategoryIndex !== gameState.currentCategoryIndex;
+  lastRenderedCategoryIndex = gameState.currentCategoryIndex;
+
   playerElement.textContent =
     currentPlayer.name || `Joueur ${currentPlayer.id}`;
   categoryLabelElement.textContent = currentCategory.label;
+
+  if (categoryChanged) {
+    categoryLabelElement.classList.remove("pop-in");
+    void categoryLabelElement.offsetWidth;
+    categoryLabelElement.classList.add("pop-in");
+  }
 
   ((itemsElement.innerHTML = ""),
     currentCategory.items.map((itemId, index) => {
@@ -44,6 +56,10 @@ export const renderPicker = () => {
 
       if (index === gameState.focusedItemIndex) {
         button.classList.add("is-focused");
+      }
+      if (categoryChanged) {
+        button.classList.add("pop-in");
+        button.style.animationDelay = `${index * 40}ms`;
       }
       button.addEventListener("click", () => {
         gameState.focusedItemIndex = index;
@@ -67,7 +83,7 @@ validateButton.addEventListener("click", () => {
   if (isLastCategory && isLastPlayer) {
     validateButton.textContent = "Passer commande";
   } else {
-    validateButton.textContent = "Valider";
+    validateButton.textContent = "Je garde ça !";
   }
 });
 
@@ -156,8 +172,8 @@ export const renderPlayerTransition = () => {
   const nextPlayer = players[gameState.currentPlayerIndex + 1];
 
   transitionMessageElement.textContent =
-    `${finishedPlayer.name} a terminé son brunch ! ` +
-    `À ${nextPlayer.name} de jouer.`;
+    `${finishedPlayer.name} a terminé sa préparation ! ` +
+    `À ${nextPlayer.name} de créer son brunch ✨.`;
 };
 
 export const renderGame = () => {
@@ -169,6 +185,15 @@ export const renderGame = () => {
 startNextPlayerButton.addEventListener("click", () => {
   startNextPlayer();
   renderGame();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (gameState.status !== "player-transition" || event.key !== "Enter") {
+    return;
+  }
+
+  event.preventDefault();
+  startNextPlayerButton.click();
 });
 
 const gameFinishedElement = document.querySelector(".game-finished");
@@ -232,6 +257,15 @@ sendCommandButton.addEventListener("click", async () => {
     console.error("Impossible de copier la commande :", error);
     sendCommandButton.textContent = "Erreur lors de la copie";
   }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (gameState.status !== "finished" || event.key !== "Enter") {
+    return;
+  }
+
+  event.preventDefault();
+  sendCommandButton.click();
 });
 
 const createCommandText = () => {
