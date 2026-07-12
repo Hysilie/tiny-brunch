@@ -181,15 +181,6 @@ export const renderFinishedGame = () => {
 
   listContainer.innerHTML = "";
   listContainer.append(...players.map((player) => createListByPlayer(player)));
-
-  sendCommandButton.addEventListener("click", () => {
-    console.log("Send informations ");
-    gameState.currentPlayerIndex = 0;
-    gameState.currentCategoryIndex = 0;
-    gameState.focusedItemIndex = 0;
-    gameState.status = "intro";
-    console.log(gameState);
-  });
 };
 
 const createListByPlayer = (player) => {
@@ -218,4 +209,51 @@ const createListByPlayer = (player) => {
   playerList.append(ul);
 
   return playerList;
+};
+
+sendCommandButton.addEventListener("click", async () => {
+  const commandText = createCommandText();
+
+  try {
+    await navigator.clipboard.writeText(commandText);
+
+    sendCommandButton.textContent = "Commande copiée !";
+
+    gameState.currentPlayerIndex = 0;
+    gameState.currentCategoryIndex = 0;
+    gameState.focusedItemIndex = 0;
+    gameState.status = "intro";
+
+    setTimeout(() => {
+      sendCommandButton.textContent = "Passer commande";
+      renderGame();
+    }, 1000);
+  } catch (error) {
+    console.error("Impossible de copier la commande :", error);
+    sendCommandButton.textContent = "Erreur lors de la copie";
+  }
+});
+
+const createCommandText = () => {
+  return players
+    .map((player) => {
+      const playerName = player.name || `Joueur ${player.id}`;
+
+      const choices = categories
+        .map((category) => {
+          const itemId = player.choices[category.id];
+          const item = items[itemId];
+
+          if (!item) {
+            return null;
+          }
+
+          return `${category.label} : ${item.name}`;
+        })
+        .filter(Boolean)
+        .join("\n");
+
+      return `${playerName}\n${choices}`;
+    })
+    .join("\n\n");
 };
